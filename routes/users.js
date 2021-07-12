@@ -6,15 +6,16 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 // Passport
 const passport = require('passport');
+// Importing authentication
+const { ensureAuthenticated, notAuthenticated } = require('../config/auth');
 
 // Set get route to registration page
-router.get('/register', (req, res) => {
-
+router.get('/register', notAuthenticated, (req, res) => {
 	res.render('register');
 })
 
 // Set get route to login page
-router.get('/login', (req, res) => {
+router.get('/login', notAuthenticated, (req, res) => {
 	res.render('login');
 })
 
@@ -90,7 +91,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', {
 		successRedirect: '/dashboard',
-		failureRedirect: '/users/register',
+		failureRedirect: '/users/login',
 	}) (req, res, next);
 })
 

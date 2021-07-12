@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importing authentication
-const { ensureAuthenticated } = require('../config/auth');
+const { ensureAuthenticated, notAuthenticated } = require('../config/auth');
 // Importing model
 const User = require('../models/User');
 // Object ID
@@ -15,22 +15,24 @@ router.get('/', ensureAuthenticated, (req, res) => {
 	});
 })
 
+// Update Database of posted message
 router.post('/message', ensureAuthenticated, async (req, res) => {
 	const { message } = req.body;
-	await User.findOneAndUpdate ({
-		email: req.user.email
-	},
-	{
-		$push: {
+	await User.findOneAndUpdate (
+		{ email: req.user.email },
+		{ 
+			$push: {
 			messages: {
 				_id: ObjectID(),
 				message: message
+				}
 			}
 		}
-	});
+	);
 	res.redirect('/dashboard');
 })
 
+// Implemented deletion of messages using unique ObjectID
 router.get('/delete/:id', async (req, res) => {
 	const key = req.params.id;
 	const messages = req.user.messages;

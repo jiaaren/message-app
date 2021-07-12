@@ -5,5 +5,11 @@ module.exports = {
 		}
 		// need this even if user tries to access to site requiring authentication directly
 		res.redirect('/users/login');
+	},
+
+	notAuthenticated: function(req, res, next) {
+		if (req.isAuthenticated())
+			res.redirect('/dashboard');
+		return next();
 	}
 }
