@@ -1,0 +1,25 @@
+<h1>Dashboard</h1>
+<p>Welcome <%= name %></p>
+<form action="dashboard/message" method="POST">
+    <label for="message"> Message </label>
+    <input
+        type="name"
+        id="message"
+        name="message"
+        placeholder="Enter Message"
+    />
+    <button type="submit">
+        Submit message
+    </button>
+</form>
+<h2> Messages </h2>
+<% if (typeof messages != 'undefined') { %>
+    <% messages.forEach(function(messages) { %>
+        <p>
+            <%= messages.message %> 
+            <a href="dashboard/delete/<%= messages._id %>">Delete</a>
+        </p>
+    <% }); %>
+<% } %>
+
+<a href="/users/logout">Logout</a>
