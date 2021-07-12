@@ -77,7 +77,7 @@ router.post('/register', (req, res) => {
 							// save new user to Database
 							newUser.save()
 								.then(user => {
-									res.redirect('/users/login');
+									res.redirect('/login');
 								})
 								.catch(err => console.log(err));
 						})
@@ -91,7 +91,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', {
 		successRedirect: '/dashboard',
-		failureRedirect: '/users/login',
+		failureRedirect: '/login',
 	}) (req, res, next);
 })
 

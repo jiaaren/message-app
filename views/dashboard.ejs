@@ -1,25 +1,49 @@
-<h1>Dashboard</h1>
-<p>Welcome <%= name %></p>
-<form action="dashboard/message" method="POST">
-    <label for="message"> Message </label>
-    <input
-        type="name"
-        id="message"
-        name="message"
-        placeholder="Enter Message"
-    />
-    <button type="submit">
-        Submit message
-    </button>
-</form>
-<h2> Messages </h2>
-<% if (typeof messages != 'undefined') { %>
-    <% messages.forEach(function(messages) { %>
-        <p>
-            <%= messages.message %> 
-            <a href="dashboard/delete/<%= messages._id %>">Delete</a>
-        </p>
-    <% }); %>
-<% } %>
+<div class="wrap-login100 p-t-50 p-b-90 message-form">
+    <span class="login100-form-title welcome">
+        Welcome, <%= name %>!
+    </span>
+    <form action="/dashboard/message" class="form-display" method="POST">
+        <div class="wrap-input100 validate-input m-b-16 message-text" data-validate = "Username is required">
+            <input 
+                class="input100 form-control" 
+                type="name"
+                id="message"
+                name="message"
+                placeholder="Enter message"
+            />
+            <span class="focus-input100"></span>
+        </div>
+        <div class="container-login100-form-btn m-t-17 submit-button">
+            <button class="login100-form-btn" type="submit">
+                Submit
+            </button>
+        </div>
+    </form>
 
-<a href="/users/logout">Logout</a>
+    <span class="login100-form-title messages-display-text">
+        Messages
+    </span>
+    <% if (typeof messages != 'undefined' && messages.length > 0) { %>
+        <% messages.forEach(function(messages) { %>
+            <div class="message-container form-control">
+                <div class="message-message">
+                    <%= messages.message %> 
+                </div>
+                <div class="message-delete">
+                    <a href="dashboard/delete/<%= messages._id %>" class="delete-text">Delete</a>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <div class="message-container form-control">
+            <div class="message-message">
+                No messages found, please enter new message
+            </div>
+        </div>
+    <% } %>
+    <div class="end_line logout">
+        <a href="/logout" class="txt1">
+                Logout
+        </a>
+    </div>
+</div>

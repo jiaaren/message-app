@@ -35,13 +35,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
+// Link static folder, public
+app.use(express.static("public"));
+
 // Middleware for routes (/routes), make sure to pass these at bottom
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 const dashboard = require('./routes/dashboard');
 app.use('/dashboard', dashboard);
 const users = require('./routes/users');
-app.use('/users', users);
+app.use('/', users);
+// set default route
+app.get('*', (req, res) => {
+	res.redirect('/register');
+})
 
 // set PORT
 const PORT = process.env.PORT || 5000;

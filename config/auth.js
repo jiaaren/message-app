@@ -4,12 +4,13 @@ module.exports = {
 			return next();
 		}
 		// need this even if user tries to access to site requiring authentication directly
-		res.redirect('/users/login');
+		res.redirect('/login');
 	},
 
 	notAuthenticated: function(req, res, next) {
 		if (req.isAuthenticated())
 			res.redirect('/dashboard');
-		return next();
+		else
+			return next();
 	}
 }

@@ -1,27 +1,40 @@
-<h1>Login</h1>
-    <form action="/users/login" method="POST">
-        <div>
-        <label for="email">Email</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-        />
+<div class="wrap-login100 p-t-50 p-b-90">
+    <span class="login100-form-title welcome">
+        Login here!
+    </span>
+    <form action="/login" method="POST">
+        <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
+            <input 
+                class="input100 form-control" 
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
+            />
+            <span class="focus-input100"></span>
+        </div>    
+        <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+            <input 
+                class="input100 form-control" 
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+            />
+            <span class="focus-input100"></span>
         </div>
-        <div>
-        <label for="password">Password</label>
-        <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Enter Password"
-        />
+        <div class="container-login100-form-btn m-t-17">
+            <button class="login100-form-btn" type="submit">
+                Login
+            </button>
         </div>
-        <button type="submit" >Login</button>
     </form>
-<p>
-    No Account? <a href="/users/register">Register</a>
-</p>
+
+    <div class="end_line">
+        <div>
+            <a href="/register" class="txt1">
+                No account? Register Here!
+            </a>
+        </div>
+    </div>
+</div>

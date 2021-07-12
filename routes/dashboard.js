@@ -18,17 +18,20 @@ router.get('/', ensureAuthenticated, (req, res) => {
 // Update Database of posted message
 router.post('/message', ensureAuthenticated, async (req, res) => {
 	const { message } = req.body;
-	await User.findOneAndUpdate (
-		{ email: req.user.email },
-		{ 
-			$push: {
-			messages: {
-				_id: ObjectID(),
-				message: message
+	if (message != 'undefined' && message.length > 0)
+	{
+		await User.findOneAndUpdate (
+			{ email: req.user.email },
+			{ 
+				$push: {
+				messages: {
+					_id: ObjectID(),
+					message: message
+					}
 				}
 			}
-		}
-	);
+		);
+	}
 	res.redirect('/dashboard');
 })
 

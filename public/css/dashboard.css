@@ -1,0 +1,73 @@
+/* 
+	Login and registration
+*/
+
+.welcome {
+  padding-bottom: 30px;
+}
+
+.end_line {
+  text-align: right;
+  padding-top: 10px;
+}
+
+/*
+	Dashboard
+	Messages form
+*/
+
+.message-form {
+  width: 80%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.message-text {
+  padding: 0px;
+  margin: 0px;
+}
+
+.submit-button {
+  width: 20%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.form-display {
+  display: flex;
+  align-content: space-between;
+}
+
+/*
+	Dashboard
+	Message display
+*/
+
+.messages-display-text {
+  padding-top: 25px;
+}
+
+.message-container {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+}
+
+.message-message {
+  width: 90%;
+}
+
+.message-delete {
+  text-align: right;
+  width: 10%;
+}
+
+.delete-text {
+  color: red;
+}
+/*
+	Logout button
+*/
+.logout {
+  margin-top: 50px;
+}
