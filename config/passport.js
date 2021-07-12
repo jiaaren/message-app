@@ -9,7 +9,7 @@ module.exports = function(passport) {
 	passport.use(
 		new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
 			// Math User, manage promise with then() and catch()
-			User.findOne({ email : email })
+			User.findOne({ email : email.toLowerCase() })
 				.then(user => {
 					if (!user) {
 						return done(null, false, { message : 'That email is not registered'});

@@ -21,7 +21,8 @@ router.get('/login', notAuthenticated, (req, res) => {
 
 // Set post route to registration page
 router.post('/register', (req, res) => {
-	const { first_name, last_name, email, password, password2 } = req.body;
+	let { first_name, last_name, email, password, password2 } = req.body;
+	email = email.toLowerCase();
 	let errors = [];
 
 	// Check required fields
@@ -65,8 +66,8 @@ router.post('/register', (req, res) => {
 				} else {
 					// if doesn't exist, create new user based on Schema 'User' declared above
 					const newUser = new User({
-						first_name : first_name,
-						last_name : last_name,
+						first_name: first_name,
+						last_name: last_name,
 						email: email,
 						password: password
 					});

@@ -36,7 +36,7 @@ router.post('/message', ensureAuthenticated, async (req, res) => {
 })
 
 // Implemented deletion of messages using unique ObjectID
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id', ensureAuthenticated, async (req, res) => {
 	const key = req.params.id;
 	const messages = req.user.messages;
 	if (messages != 'undefined')
