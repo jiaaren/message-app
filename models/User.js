@@ -16,7 +16,11 @@ const UserSchema = new mongoose.Schema({
 	},
 	messages : [{
 		_id: reqString,
-		message: reqString
+		message: reqString,
+		date: {
+			type: Date,
+			default: Date.now
+		}
 	}]
 });
 
