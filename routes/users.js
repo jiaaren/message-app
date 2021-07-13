@@ -19,12 +19,7 @@ router.get('/login', notAuthenticated, (req, res) => {
 	res.render('login');
 })
 
-// Set post route to registration page
-router.post('/register', (req, res) => {
-	let { first_name, last_name, email, password, password2 } = req.body;
-	email = email.toLowerCase();
-	let errors = [];
-
+function verifyInput (first_name, last_name, email, password, password2, errors) {
 	// Check required fields
 	if (!first_name || !last_name || !email || !password || !password2) {
 		errors.push({ msg: 'Please fill in all required fields'});
@@ -38,16 +33,37 @@ router.post('/register', (req, res) => {
 	if (password.length < minlen) {
 		errors.push({ msg: `Password should at least be ${minlen} characters`})
 	}
-	if (errors.length > 0) {
-		res.render('register', {
-			errors,
-			first_name,
-			last_name,
-			email,
-			password,
-			password2
-		})
-	}
+}
+
+function renderRegister_existing (first_name, last_name, email, password, password2, errors, res) {
+	res.render('register', {
+		errors,
+		first_name,
+		last_name,
+		email,
+		password,
+		password2
+	});
+}
+
+function createUser(first_name, last_name, email, password) {
+	const newUser = new User({
+		first_name: first_name,
+		last_name: last_name,
+		email: email,
+		password: password
+	});
+	return (newUser);	
+}
+
+// Set post route to registration page
+router.post('/register', (req, res) => {
+	let { first_name, last_name, email, password, password2 } = req.body;
+	email = email.toLowerCase();
+	let errors = [];
+	verifyInput(first_name, last_name, email, password, password2, errors);
+	if (errors.length > 0) 
+		renderRegister_existing(first_name, last_name, email, password, password2, errors, res);
 	else {
 		// Verify if user already exists, username = email address
 		User.findOne({ email: email })
@@ -55,22 +71,10 @@ router.post('/register', (req, res) => {
 				// if exists
 				if (user) {
 					errors.push({ msg: 'Email already registered'});
-					res.render('register', {
-						errors,
-						first_name,
-						last_name,
-						email,
-						password,
-						password2
-					})
+					renderRegister_existing(first_name, last_name, email, password, password2, errors, res);
 				} else {
 					// if doesn't exist, create new user based on Schema 'User' declared above
-					const newUser = new User({
-						first_name: first_name,
-						last_name: last_name,
-						email: email,
-						password: password
-					});
+					const newUser = createUser(first_name, last_name, email, password);
 					bcrypt.genSalt(10, (err, salt) =>
 						bcrypt.hash(newUser.password, salt, (err, hash) => {
 							if (err) throw err;
@@ -86,6 +90,7 @@ router.post('/register', (req, res) => {
 					)
 				}
 			})
+			.catch(err => console.log(err));
 	}
 })
 
