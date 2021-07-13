@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importing authentication
-const { ensureAuthenticated, notAuthenticated } = require('../config/auth');
+const { ensureAuthenticated } = require('../config/auth');
 // Importing model
 const User = require('../models/User');
 // Object ID
@@ -44,13 +44,9 @@ router.get('/delete/:id', ensureAuthenticated, async (req, res) => {
 		messages.forEach(async (messages) => {
 			if (messages._id === key)
 			{
-				await User.findOneAndUpdate({
-					email: req.user.email
-				},
+				await User.findOneAndUpdate({ email: req.user.email },
 				{
-					$pull : {
-						messages : messages
-					}
+					$pull : { messages : messages }
 				})
 			}
 		})
