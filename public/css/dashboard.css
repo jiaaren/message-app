@@ -47,12 +47,13 @@
 }
 
 .message-message {
-  width: 90%;
+  word-wrap: break-word;
+  width: 92%;
 }
 
 .message-delete {
   text-align: right;
-  width: 10%;
+  width: 8%;
 }
 
 .delete-text {
@@ -62,5 +63,6 @@
 	Logout button
 */
 .logout {
-  margin-top: 50px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
