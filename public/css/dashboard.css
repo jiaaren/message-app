@@ -25,6 +25,12 @@
   align-content: space-between;
 }
 
+@media (max-width: 500px) {
+  .message-form {
+    width: 100%;
+  }
+}
+
 /*
 	Dashboard
 	Message display
