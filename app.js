@@ -3,6 +3,7 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const db = require('./config/keys').MongoURI;
+const flash = require('connect-flash');
 
 // Set up Embedded Javascript templating module for use
 app.use(expressLayouts);
@@ -38,9 +39,17 @@ require('./config/passport')(passport);
 // Link static folder, public
 app.use(express.static("public"));
 
+// Connect Flash
+app.use(flash());
+// Global variables
+app.use((req, res, next) => {
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	next();
+});
+
 // Middleware for routes (/routes), make sure to pass these at bottom
-// const index = require('./routes/index');
-// app.use('/', index);
 const dashboard = require('./routes/dashboard');
 app.use('/dashboard', dashboard);
 const users = require('./routes/users');
