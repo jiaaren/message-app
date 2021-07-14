@@ -1,3 +1,10 @@
+**Overview**
+
+Refer to the following pdf for architecture of project
+
+		architecture_overview.pdf
+
+**Deploying for local use**
 1. First, install node modules
 
 		npm install
@@ -14,8 +21,9 @@ OR
 3. Run app
 
 		npm start
-		visit http://localhost:(port number)/  -  will be defaulted to port 5000 if no environment variable detected
+		visit http://localhost:<port number>/
+		(will be defaulted to port 5000 if no environment variable detected)
 		
-4. Visit deployment in heroku
+**You can also visit my deployment in heroku with the following link**
 
-		https://jiaren-messageapp.herokuapp.com/
+		https://jiaren-messageapp.herokuapp.com
