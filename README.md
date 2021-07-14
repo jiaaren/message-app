@@ -5,7 +5,7 @@
 2. Make sure to set environment variable for 'MongoURI', either:
 - Create file at root of repository, '.env', and enter the following within file
 
-		MongoURI=<URI address"
+		MongoURI=<URI address>
 
 OR
 
