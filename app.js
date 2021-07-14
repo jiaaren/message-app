@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
-const db = require('./config/keys').MongoURI;
 const flash = require('connect-flash');
+
+// Import environment variable, i.e. MongoURI key
+require('dotenv/config');
 
 // Set up Embedded Javascript templating module for use
 app.use(expressLayouts);
@@ -15,7 +17,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 // Connect to Mongo server
-mongoose.connect(db)
+mongoose.connect(process.env.MongoURI)
 	.then(() => console.log('MongoDB Connected...'))
 	.catch(err => console.log(err));
 

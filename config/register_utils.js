@@ -2,7 +2,9 @@ const User = require('../models/User');
 // Bcrypt for password encryption
 const bcrypt = require('bcryptjs');
 
+// functions to be used alongside with POST request for regitration, refer users.js
 module.exports = {
+	// verify user inputted information into registration form.
 	verifyInput: function (user_info, errors) {
 		const { first_name, last_name, email, password, password2 } = user_info;
 		// Check required fields
@@ -19,7 +21,7 @@ module.exports = {
 			errors.push({ msg: `Password should at least be ${minlen} characters`})
 		}
 	},
-	
+	// render registration form again if not validated, but with previous info filled for resubmission
 	renderRegister_existing: function (user_info, errors, res) {
 		const { first_name, last_name, email, password, password2 } = user_info;
 		res.render('register', {
@@ -31,7 +33,7 @@ module.exports = {
 			password2
 		});
 	},
-	
+	// createUser based on MongoDB schema set up
 	createUser: function (user_info) {
 		const newUser = new User({
 			first_name: user_info.first_name,
@@ -41,7 +43,7 @@ module.exports = {
 		});
 		return (newUser);	
 	},
-	
+	// hash user password and save user information into MongoDB
 	getHash: function (newUser, req, res, user) {
 		bcrypt.genSalt(10, (err, salt) =>
 			bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -58,4 +60,3 @@ module.exports = {
 		)
 	}
 }
-

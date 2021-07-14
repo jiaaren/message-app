@@ -7,7 +7,7 @@ const User = require('../models/User');
 // Object ID
 var ObjectID = require('mongodb').ObjectID;
 
-// Would need to have ensureAuthenticated to use 'user' variable
+// ensure user is authenticated before providing access to dashboard
 router.get('/', ensureAuthenticated, (req, res) => {
     res.render('dashboard', {
 		name: req.user.first_name,
